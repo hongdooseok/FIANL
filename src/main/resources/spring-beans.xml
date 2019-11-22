@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans" 
+		xmlns:context = "http://www.springframework.org/schema/context"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+>
+<context:annotation-config /> <!-- 얘는 auto 쓸거여서 컨트롤러나 빈즈에만 있으면 된다. -->
+<!-- 의존객체 주입을 해야하잖아. -->
+<bean id ="memberJoinService" class="Service.Member.MemberJoinService"></bean>
+
+<bean id ="memberDAO" class="Model.DAO.MemberDAO"></bean>
+<bean id="authService" class="Service.Member.AuthService"></bean>
+<bean id="memberDetailService" class="Service.Member.MemberDetailService"></bean>
+<bean id="memberModifyService" class="Service.Member.MemberModifyService"></bean>
+<bean id="changePwService" class="Service.Member.ChangePwService"></bean>
+<bean id="passwordModifyService" class="Service.Member.PasswordModifyService"></bean>
+<bean id="mainService" class="Service.Member.MainService"></bean>
+<bean id="memberListService" class="Service.Member.MemberListService"></bean>
+
+</beans>

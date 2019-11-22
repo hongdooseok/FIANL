@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://java.sun.com/xml/ns/javaee"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		version="3.0">
+
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <servlet>
+  	<servlet-name>dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param><!-- 이게 뭔가요 --><!-- 서블릿중에 이 서블릿을 몇번 째로 인식하겠냐?  -->
+  		<!-- 빈 설정 파일을 하나 이상 사용하거나 파일 이름과 경로를 직접 지정해주고 싶을 때  contextConfigLocation라는 빈 설정 파일 결로를 설정-->
+  		<param-name>contextConfigLocation</param-name><!-- 얘는 servlet-class에 DispatcherServlet에 있는 이름을 줘야함 아무거나 주면 안됨. -->
+  		<param-value><!-- 뭘 적어주냐면 ? 저 resoirces에 있는 xml파일을 적어주는거야 --> <!-- 팀장만 건들게 하자. jdbc랑 context는 같이하는거니까 나머지 beans/controller은 각자니까 팀원이 부ㅌ탁하면 추가 -->
+	  		classpath:spring-jdbc.xml
+	  		classpath:spring-context.xml
+	  		
+	  		
+  			classpath:spring-beans.xml
+  			classpath:spring-controller.xml
+  			
+  			classpath:spring-boardbeans.xml
+  			classpath:spring-boardcontroller.xml
+  			<!-- resources/web.xml -->	
+  			<!-- 컨트롤러를 누가? -> spring-controller.xml이 이거는 누가? -> web.xml 여기 부분은 누가? -> DispatcherServlet이 ==> 결국 여기서 컨트롤러를 사용하는거 -->
+  		</param-value>
+  		<!-- value값을  contextConfigLocation에 저장해서 DispatcherServlet에 전달한다는 뜻이예요 -->
+  	</init-param>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcher</servlet-name>
+  	<url-pattern>/</url-pattern><!-- /만주면 확장자를 안줘도 된다. ==> 확장자를 지우겠다는 뜻이다. -->
+  </servlet-mapping>
+  
+  <filter>
+  
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>
+  		org.springframework.web.filter.CharacterEncodingFilter
+  	</filter-class>
+  	
+  	<init-param> <!-- 모든파일을 utf-8로 인코딩하겠다 -->
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  	
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+</web-app>

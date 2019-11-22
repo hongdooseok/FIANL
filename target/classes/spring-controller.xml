@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans" 
+		xmlns:context = "http://www.springframework.org/schema/context"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+>
+<context:annotation-config /> <!-- 얘는 auto 쓸거여서 컨트롤러나 빈즈에만 있으면 된다. -->
+<!-- 컨트롤러만 id가 없음.. 의존객체 될 이유가 없으니까? -->
+<bean class="SpringController.HelloController" />
+<bean class="Controller.Member.MemberController"/>
+	<!-- <property name="memberJoinService" ref="memberJoinService"></property> name="멤버피드"  ref는 beans에 있는 id값 -->
+	
+<bean class="Controller.Member.LoginController" />
+<bean class="Controller.Member.MainController" />
+<bean class="Controller.Member.LogoutController" />
+<bean class="Controller.Member.MemberDetailController" />
+<bean class="Controller.Member.MemberPasswordController" />
+<bean class="Controller.Member.PasswordModifyController" />
+<bean class="Controller.Member.MemberListController" />
+<bean class="Controller.Member.MemberInfoController" />
+
+
+</beans>

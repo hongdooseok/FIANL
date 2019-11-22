@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+		xmlns:mvc="http://www.springframework.org/schema/mvc" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+							http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+><!-- 이렇게 까지가 mvc 기본 설정 -->
+
+
+<!-- @Controller => 내가 컨트롤러로 쓰겠다, @Service => 내가 서비스로 쓰겠다 , @Repository => 내가  Repository로 쓰겠다... !!! ===> gerter/setter를 안쓴다. -->
+<mvc:annotation-driven />
+<mvc:default-servlet-handler/>
+<!-- //메인은 첫페이지인데 컨트롤러에 적지말구 컨트롤러에 적은것처럼 사용할 수 없을까? 하는법이 요기!! -->
+<!-- <mvc:view-controller path="/main" view-name="Main/main"/> 컨트롤러처럼 사용할 수 있게 하는것. 여기에 많이 쓰는건.. 페이지만 리턴하는거 !! // 로직이 있는거는 쓸 수 없음. 아 지워야함. -->
+<!-- 앞얘 애를 지워라라는 뜻 => prefix -->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/view/"/><!-- 얘를 쓰면 확장자도 지울 수 있음. -->
+	</mvc:view-resolvers>
+	
+	<!-- 루트에 있는 모든파일에 이로케이션을추가하겠다 일년동안 한달이래  막 안켜졌을 수가 있다는데?-->
+	<mvc:resources location="/WEB-INF/view/" mapping="/**" cache-period="31556926" />
+
+	<!-- AuthcheckInterceptor을 사용하려면 여기에다가 추가해야함 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 얘는 폴더명이아니라 경로야 !! << 이게 중요한거야 /컨텍스트 패스를 제외한 주소?! -->
+			<mvc:mapping path="/edit/**"/><!-- 주소가 /edit로 시작되는 / 얘 주소가 있으면 아래 Interceptor.AuthcheckInterceptor가 실행 되도록 만드는거예여 -->
+			<bean class="Interceptor.AuthcheckInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	
+	
+	<!-- 여기다가 어떤 빈을 만들어서 쓸거냐면 메시지소스라는걸. -->
+	<!-- 우리가 프레임 워크를 사용하는 가장 중요한 이유는 ? 유지보수 때문이지  -->
+	<!-- 페이지의 title을 쉽게 바꿀수 있도록 만들기 위해 사용하는 것이 여기예여 title이 손님 가입 막 이런게 계속 있어 그럼 이게 100페이지나 되면 어케? -->
+	<!-- 그리고 main의 reources안에 폴더를 만들어야한다 이거는 고정이다!  폴더명은 상관 없음.. -->
+	<!-- 폴더가 뭐냐 <value>message.label</value>이거의 앞 message인거고 뒤는 폴더안에 뒤는 파일명!! 확장자는 ? properties고정임!!!!!! -->
+	<!-- label.properties 만들고 그냥하면 16진수가 적히게 된다 글을 적고 싶으면 파일 오른쪽  open with -> text로 바꾸면 된다.-->
+	<!-- register.done=<strong>{0}님</strong> 메일주소 {1}, 회원 가입을 완료했습니다. 0은 이름 1은 메일주소 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames"> <!-- setter 초기화잖아 여기부분이 -->
+			<list>
+				<value>message.label</value> <!-- 얘는 text파일이고 -->
+				<value>message.error</value>
+				<value>message.Answerboard</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8"></property> <!-- 얘는 UTF-8로 되어있다 이내용임 -->
+	</bean>
+	
+	<!-- 멀티파트가 사용하는 의존객체 -->
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1000000000" />
+		<property name="maxInMemorySize" value="1000000000" />
+	</bean>
+	
+	
+	
+
+</beans>

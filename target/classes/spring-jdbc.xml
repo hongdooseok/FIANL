@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+	<!-- 드라이버 매니저 같은느낌? -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close"><!-- id는 데이터 소스 라고 보통 준다/ 저건 자동 커밋?-->
+			<!-- 오라클 드라이버 클래스(Maven Dep 저안에 ojdbc6안에 있다는 소리) -->
+			<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+			<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE" />
+			<property name="user" value="STUDY"></property>
+			<property name="password" value="STUDY"></property>
+	</bean>
+	
+</beans>
