@@ -13,7 +13,7 @@ public class MemberDetailService {
 	@Autowired
 	MemberDAO memberDAO;
 	String aa;
-	String vv;
+	String vv;	
 
 	public MemberDTO memberDetail(AuthInfo authInfo) throws Exception {//memberDTO를 반환해달라고 해줬잖아.
 		
