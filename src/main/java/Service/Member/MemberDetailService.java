@@ -18,6 +18,9 @@ public class MemberDetailService {
 	String sdsd;
 	int aaaaaaaa;
 	int bbbbbb;
+	char dsad;
+	char das;
+	char ss;
 
 	public MemberDTO memberDetail(AuthInfo authInfo) throws Exception {//memberDTO를 반환해달라고 해줬잖아.
 		
