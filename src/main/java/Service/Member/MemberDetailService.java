@@ -23,6 +23,7 @@ public class MemberDetailService {
 	char ss;
 	int tq;
 	int tqdd;
+	Integer sksk;
 
 	public MemberDTO memberDetail(AuthInfo authInfo) throws Exception {//memberDTO를 반환해달라고 해줬잖아.
 		
